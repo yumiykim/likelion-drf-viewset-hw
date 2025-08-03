@@ -3,6 +3,8 @@ from .models import Post, Comment
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    writer = serializers.StringRelatedField(read_only=True)
+    
     class Meta:
         model = Comment
         fields = '__all__'
@@ -10,6 +12,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
+    writer = serializers.StringRelatedField(read_only=True)
     comment_count = serializers.IntegerField(source='comments.count', read_only=True)
 
     class Meta:
