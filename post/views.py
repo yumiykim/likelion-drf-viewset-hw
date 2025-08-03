@@ -33,7 +33,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['get'])
     def top(self, request):
-        top_posts = Post.objects.order_by('-like_count')[:3]
+        top_posts = Post.objects.order_by('-like_count', '-id')[:3]
         serializer = self.get_serializer(top_posts, many=True)
         return Response(serializer.data)
 
